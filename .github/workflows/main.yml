@@ -1,0 +1,59 @@
+name: Deploy application for production!
+
+on:
+  pull_request:
+    types:
+      - closed
+      - synchronize
+    branches: 
+      - master
+    
+ 
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup use Nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          
+      - name: Install Dependecies
+        run: npm install
+
+      - name: "create .env file"
+        run: |
+          touch .env
+          echo URL_API=${{ secrets.URL_API }} >> .env
+          echo URL_MONGO_PROD=${{ secrets.URL_MONGO_PROD }} >> .env
+          echo PORT=${{ secrets.PORT }} >> .env
+
+      - name: Build Application
+        run: npm run build
+        
+      - name: Copy file via ssh
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.IP_INSTANCE }}
+          username: ${{ secrets.USER_INSTANCE }}
+          port: ${{ secrets.PORT_INSTANCE }}
+          key: ${{ secrets.SSH_KEY_USER }}
+          source: "., !node_modules"
+          target: "~/app/lp-ecommerce-api"
+          
+      - name: Running application in instance EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.IP_INSTANCE }}
+          username: ${{ secrets.USER_INSTANCE }}
+          port: ${{ secrets.PORT_INSTANCE }}
+          key: ${{ secrets.SSH_KEY_USER }}
+          script: |
+            cd ~/app/lp-ecommerce-api
+            npm install
+            cd
+            pm2 restart app
