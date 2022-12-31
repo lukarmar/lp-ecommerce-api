@@ -25,13 +25,6 @@ jobs:
       - name: Install Dependecies
         run: npm install
 
-      - name: "create .env file"
-        run: |
-          touch .env
-          echo URL_API=${{ secrets.URL_API }} >> .env
-          echo URL_MONGO_PROD=${{ secrets.URL_MONGO_PROD }} >> .env
-          echo PORT=${{ secrets.PORT }} >> .env
-
       - name: Build Application
         run: npm run build
         
@@ -56,4 +49,4 @@ jobs:
             cd ~/app/lp-ecommerce-api
             npm install
             cd
-            pm2 restart app
+            pm2 restart ~/.pm2/ecosystem.config.js --env production --only app
