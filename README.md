@@ -28,12 +28,12 @@ Follow these steps:
 
 Clone repository `<SSH>` :
 ````
-git clone https://github.com/lukarmar/movie-catalog-api.git
+git clone git@github.com:lukarmar/lp-ecommerce-api.git
 ````
 
 Clone repository `<HTTPS>` :
 ```
-git clone git@github.com:lukarmar/movie-catalog-api.git
+git clone https://github.com/lukarmar/lp-ecommerce-api.git
 ```
 
 Install dependencies:
@@ -47,7 +47,6 @@ docker-compose up
 ```
 </br>
 
-### Documentation: [api-doc](https://app-api-catalog-movie.herokuapp.com/api-docs/)
 ---
 
 Made by me. At the sound of gun. By Luka Rocha :wave: [Linkedin](https://www.linkedin.com/in/luka-martins/)
