@@ -1,0 +1,217 @@
+{
+  "openapi": "3.0.0",
+  "info":  {
+    "title": "LP Ecommerce - API",
+    "description": "This is a sample server for a Landing Page Ecommerce.",
+    "contact": {
+      "name": "Luka Rocha",
+    
+      "email": "luka.rmar@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/products": {
+      "post": {
+        "tags": ["Create Products"],
+        "summary": "Create a new product",
+        "description": "The creation of the product is done by external API feed, having no body",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "productId": {
+                    "type": "integer",
+                    "description": "Origin id of the product"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "Title of the product"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of the product"
+                  },
+                  "price": {
+                    "type": "integer",
+                    "description": "Price of the product"
+                  },
+                  "rating": {
+                    "type": "integer",
+                    "description": "Rating of the product"
+                  },
+                  "stock": {
+                    "type": "integer",
+                    "description": "Stock of the product"
+                  },
+                  "brand": {
+                    "type": "string",
+                    "description": "Brand of the product"
+                  },
+                  "category": {
+                    "type": "string",
+                    "description": "Category of the product"
+                  },
+                  "thumbnail": {
+                    "type": "integer",
+                    "description": "Thumbnail of the product"
+                  },
+                  "images": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "Images of the product"
+                  },
+                  "isFavorite": {
+                    "type": "boolean",
+                    "description": "Favorite of the product"
+                  }
+                },
+                "example": {
+                  "productId": 38,
+                  "title": "sublimation plain kids tank",
+                  "description": "sublimation plain kids tank tops wholesale",
+                  "price": 100,
+                  "discountPercentage": 11.12,
+                  "rating": 4.8,
+                  "stock": 20,
+                  "brand": "Soft Cotton",
+                  "category": "tops",
+                  "thumbnail": "https://i.dummyjson.com/data/products/38/thumbnail.jpg",
+                  "images": [
+                    "https://i.dummyjson.com/data/products/38/1.png",
+                    "https://i.dummyjson.com/data/products/38/2.jpg",
+                    "https://i.dummyjson.com/data/products/38/3.jpg",
+                    "https://i.dummyjson.com/data/products/38/4.jpg"
+                    ],
+                  "isFavorite": false
+                  },
+                "required": [
+                  "productId",
+                  "title",
+                  "description",
+                  "price",
+                  "discountPercentage",
+                  "rating",
+                  "stock",
+                  "brand",
+                  "category",
+                  "thumbnail",
+                  "images",
+                  "isFavorite"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Product created",
+            "content": { "sucess": "OK" }
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        } 
+      },
+      "get": {
+        "tags": ["Get Products"],
+        "summary": "List all Products",
+        "description": "List all Products",
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "description": "Create id Mongodb"
+                      },
+                      "productId": {
+                        "type": "integer",
+                        "description": "Origin id of the product"
+                      },
+                      "title": {
+                        "type": "string",
+                        "description": "Title of the product"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "Description of the product"
+                      },
+                      "price": {
+                        "type": "integer",
+                        "description": "Price of the product"
+                      },
+                      "rating": {
+                        "type": "integer",
+                        "description": "Rating of the product"
+                      },
+                      "stock": {
+                        "type": "integer",
+                        "description": "Stock of the product"
+                      },
+                      "brand": {
+                        "type": "string",
+                        "description": "Brand of the product"
+                      },
+                      "category": {
+                        "type": "string",
+                        "description": "Category of the product"
+                      },
+                      "thumbnail": {
+                        "type": "integer",
+                        "description": "Thumbnail of the product"
+                      },
+                      "images": {
+                        "type": "array",
+                        "items": {"type": "string"},
+                        "description": "Images of the product"
+                      },
+                      "isFavorite": {
+                        "type": "boolean",
+                        "description": "Favorite of the product"
+                      }
+                    },
+                    "example": {
+                      "_id": "5f9f1b9b0b9b9b0b9b0b9b0b",
+                      "title": "sublimation plain kids tank",
+                      "description": "sublimation plain kids tank tops wholesale",
+                      "price": 100,
+                      "discountPercentage": 11.12,
+                      "rating": 4.8,
+                      "stock": 20,
+                      "brand": "Soft Cotton",
+                      "category": "tops",
+                      "thumbnail": "https://i.dummyjson.com/data/products/38/thumbnail.jpg",
+                      "images": [
+                        "https://i.dummyjson.com/data/products/38/1.png",
+                        "https://i.dummyjson.com/data/products/38/2.jpg",
+                        "https://i.dummyjson.com/data/products/38/3.jpg",
+                        "https://i.dummyjson.com/data/products/38/4.jpg"
+                        ],
+                      "isFavorite": false,
+                      "created_at": "2020-10-30T20:00:00.000Z",
+                      "updated_at": "2020-10-30T20:00:00.000Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+}
