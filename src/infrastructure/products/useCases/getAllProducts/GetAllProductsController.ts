@@ -12,7 +12,6 @@ export default class GetAllProductsController{
       const products = await getAllProductsUseCase.execute()
 
       return response.status(201).json(products)
-
       
     } catch (error) {
       return response.status(400).json({ error: error.message })

@@ -19,9 +19,9 @@ export default class ProductsRespoitory implements ProductsRepositoryInterface {
 
   async update(id: number, dataUpdate: ProductsEntity): Promise<ProductsEntity> {
     
-    await productsModel.updateOne({ id }, dataUpdate).exec()
+    await productsModel.updateOne({ productId: id }, dataUpdate).exec()
 
-    const productUpdated = await productsModel.findOne({ productId: id })
+    const productUpdated = await this.findById(id)
 
     return productUpdated;
 
@@ -61,7 +61,7 @@ export default class ProductsRespoitory implements ProductsRepositoryInterface {
   }
 
   async findById(id: number): Promise<ProductsEntity | undefined> {
-      const findProduct = await productsModel.findOne({ id });
+      const findProduct = await productsModel.findOne({ productId: id });
 
       return findProduct;
   }
